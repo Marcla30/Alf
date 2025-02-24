@@ -5,18 +5,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="./partials/styles.css" rel="stylesheet">
+    <link rel="icon" type="image/png" href="img/fav.png" />
     <title>ALF Association</title>
     <script src="https://cdn.tailwindcss.com"></script>
 
 </head>
-<body class="bg-gray-100 text-gray-900">
+<body>
 
 <!-- Navbar -->
 <nav class="bg-white border-gray-200 dark:bg-gray-900">
     <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <!-- Logo -->
         <a href="index.php" class="flex items-center space-x-3 rtl:space-x-reverse">
-            <img src="/img/alf-logo.jpg" class="h-8" alt="ALF Logo" />
+            <img src="/img/alf-logo.png" class="h-8" alt="ALF Logo" />
             <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">ALF Association</span>
         </a>
 

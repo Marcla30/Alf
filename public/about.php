@@ -9,6 +9,11 @@ require "./partials/header.php";
     <div class="overlay">
         <h1>About ALF Association</h1>
         <p>Promoting freedom, independence, and well-being for all felines since 1986.</p>
+        <div class="down-arrow"">
+            <svg class="size-10 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+            </svg>
+        </div>
     </div>
 </section>
 
@@ -34,6 +39,7 @@ require "./partials/header.php";
         <button onclick="location.href = '/contact.php';" class="cta-button">Contact Us</button>
     </div>
 </section>
+
 
 </body>
 </html>
