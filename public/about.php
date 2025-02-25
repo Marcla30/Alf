@@ -1,5 +1,6 @@
 <?php
 require "./partials/header.php";
+$pageTitle = "About";
 ?>
 <head>
     <link href="./partials/styles.css" rel="stylesheet">
@@ -36,7 +37,7 @@ require "./partials/header.php";
         <h2>Our Values</h2>
         <p>✨ Freedom | ✨ Respect | ✨ Compassion</p>
 
-        <button onclick="location.href = '/contact.php';" class="cta-button">Contact Us</button>
+        <button onclick="location.href = '/us.php';" class="cta-button">Discover our team</button>
     </div>
 </section>
 

@@ -112,3 +112,64 @@ function toggleActiveMember($postData) {
         return ['error' => 'Invalid member ID.'];
     }
 }
+
+// Specialty Functions
+function createSpecialty($postData) {
+    $name = trim($postData['name'] ?? '');
+    $description = trim($postData['description'] ?? '');
+
+    if (!empty($name)) {
+        $sql = 'INSERT INTO specialties (name, description) VALUES (:name, :description)';
+        $result = db()->execute($sql, [
+            ':name' => $name,
+            ':description' => $description
+        ]);
+
+        if ($result === true) {
+            return ['success' => 'Specialty created successfully!'];
+        } else {
+            return ['error' => 'Database operation failed unexpectedly.'];
+        }
+    } else {
+        return ['error' => 'Please enter a specialty name.'];
+    }
+}
+
+function editSpecialty($postData) {
+    $kspecialty = $postData['kspecialty'] ?? '';
+    $name = trim($postData['name'] ?? '');
+    $description = trim($postData['description'] ?? '');
+
+    if (!empty($kspecialty) && !empty($name)) {
+        $sql = 'UPDATE specialties SET name = :name, description = :description WHERE kspecialty = :kspecialty';
+        $result = db()->execute($sql, [
+            ':kspecialty' => (int)$kspecialty,
+            ':name' => $name,
+            ':description' => $description
+        ]);
+
+        if ($result === true) {
+            return ['success' => 'Specialty updated successfully!'];
+        } else {
+            return ['error' => 'Database operation failed unexpectedly.'];
+        }
+    } else {
+        return ['error' => 'Please fill in all required fields.'];
+    }
+}
+
+function deleteSpecialty($postData) {
+    $kspecialty = $postData['kspecialty'] ?? '';
+    if (!empty($kspecialty)) {
+        $sql = 'DELETE FROM specialties WHERE kspecialty = :kspecialty';
+        $result = db()->execute($sql, [':kspecialty' => (int)$kspecialty]);
+
+        if ($result === true) {
+            return ['success' => 'Specialty deleted successfully!'];
+        } else {
+            return ['error' => 'Database operation failed unexpectedly.'];
+        }
+    } else {
+        return ['error' => 'Invalid specialty ID.'];
+    }
+}

@@ -1,27 +1,28 @@
 <?php
 session_start();
+$pageTitle = "Login";
 include 'partials/header.php';
 require_once __DIR__ . '/../core/function.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = trim($_POST['email'] ?? '');
-    $password = $_POST['password'] ?? '';
+    $password = trim($_POST['password'] ?? '');
 
     if (!empty($email) && !empty($password)) {
-        try {
-            $sql = 'SELECT kmember, email, password_hash, is_admin FROM members WHERE email = :email';
-            $member = db()->query($sql, [':email' => $email])->find();
+        $member = db()->query('SELECT kmember, email, password_hash, is_admin FROM members WHERE email = ? AND password_hash = ?', [$email, $password])->find();
 
-            if ($member && $password === $member['password_hash']) {
-                $_SESSION['member_id'] = $member['kmember'];
-                $_SESSION['is_admin'] = $member['is_admin'];
+        if ($member) {
+            $_SESSION['member_id'] = $member['kmember'];
+            $_SESSION['is_admin'] = $member['is_admin'];
+
+            if ($member['is_admin']) {
                 header('Location: admin.php');
-                exit;
             } else {
-                $error = 'Invalid email or password.';
+                header('Location: profile.php');
             }
-        } catch (Exception $e) {
-            $error = 'Login failed. Please try again.';
+            exit;
+        } else {
+            $error = 'Invalid email or password.';
         }
     } else {
         $error = 'Please fill in all fields.';
@@ -29,8 +30,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 
-    <div class="container mx-auto py-8 px-4">
-        <h1 class="text-3xl font-bold text-center mb-6 text-gray-900 dark:text-gray-100">Admin Login</h1>
+    <div class="min-h-screen flex flex-col justify-center items-center bg-gray-900">
+        <h1 class="text-3xl font-bold text-center mb-6 text-gray-900 dark:text-gray-100">Member zone</h1>
 
         <?php if (isset($error)): ?>
             <p class="mt-4 text-red-600 dark:text-red-400 text-center"><?php echo htmlspecialchars($error); ?></p>
